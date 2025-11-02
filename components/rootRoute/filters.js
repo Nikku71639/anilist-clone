@@ -1,3 +1,4 @@
+import React from 'react';
 import Filter from "../filter";
 import { Settings } from "../logos";
 import { useState } from "react";
