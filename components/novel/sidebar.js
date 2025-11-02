@@ -3,13 +3,13 @@ import { useState } from "react";
 const Sidebar = ({
   title,
   format,
-  episodes,
+  chapters,
   status,
   season,
   seasonYear,
   meanScore,
   popularity,
-  episodeDuration,
+  pages,
   startDate,
   endDate,
   averageScore,
@@ -45,16 +45,16 @@ const Sidebar = ({
               <p>{format}</p>
             </div>
           )}
-          {episodes && (
+          {chapters && (
             <div>
-              <h4>Episodes</h4>
-              <p>{episodes}</p>
+              <h4>Chapters</h4>
+              <p>{chapters}</p>
             </div>
           )}
-          {episodeDuration && (
+          {pages && (
             <div>
-              <h4>Episode Duration</h4>
-              <p>{episodeDuration} minutes</p>
+              <h4>Pages</h4>
+              <p>{pages} minutes</p>
             </div>
           )}
           {status && (

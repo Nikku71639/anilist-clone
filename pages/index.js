@@ -3,22 +3,18 @@ import Layout from "../components/layout";
 import Landing from "../components/rootRoute/landing";
 import Filters from "../components/rootRoute/filters";
 import MediaCardList from "../components/rootRoute/mediaCardList";
-import animeListQuery from "../lib/animeListQuery";
+import novelListQuery from "../lib/novelListQuery";
 import useWindowDimensions from "../lib/useWindowDimensions";
 
 export async function getServerSideProps() {
-  const { data } = await animeListQuery();
+  const { data } = await novelListQuery();
   const topScore = data.topScore;
   const mostPopular = data.mostPopular;
-  const mostPopularThisSeason = data.mostPopularThisSeason;
-  const mostPopularNextSeason = data.mostPopularNextSeason;
   const trendingNow = data.trendingNow;
   return {
     props: {
       topScore,
       mostPopular,
-      mostPopularThisSeason,
-      mostPopularNextSeason,
       trendingNow,
     },
   };
@@ -27,8 +23,6 @@ export async function getServerSideProps() {
 export default function Home({
   topScore,
   mostPopular,
-  mostPopularThisSeason,
-  mostPopularNextSeason,
   trendingNow,
 }) {
   const { height, width } = useWindowDimensions();
@@ -36,7 +30,7 @@ export default function Home({
   return (
     <Layout>
       <Head>
-        <title>Search Anime · Anilist</title>
+        <title>Search Novel · Anilist</title>
         <link rel="icon" href="/images/AnilistIcon.png" />
       </Head>
 
@@ -50,25 +44,13 @@ export default function Home({
       />
 
       <MediaCardList
-        infoTitle="POPULAR THIS SEASON"
-        typeOfCard="picture"
-        data={mostPopularThisSeason.media}
-      />
-
-      <MediaCardList
-        infoTitle="UPCOMING NEXT SEASON"
-        typeOfCard="picture"
-        data={mostPopularNextSeason.media}
-      />
-
-      <MediaCardList
         infoTitle="ALL TIME POPULAR"
         typeOfCard="picture"
         data={mostPopular.media}
       />
 
       <MediaCardList
-        infoTitle="TOP 100 ANIME"
+        infoTitle="TOP 100 NOVELS"
         typeOfCard={width < 950 ? "picture" : "info"}
         data={topScore.media}
       />
