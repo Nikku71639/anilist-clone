@@ -105,4 +105,4 @@ export default function NovelInfoPage({ data, studios, producers }) {
       `}</style>
     </Layout>
   );
-    }
+}
