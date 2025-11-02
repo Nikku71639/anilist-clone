@@ -1,3 +1,4 @@
+import React from "react";
 import novelQuery from "../../lib/novelQuery";
 import Layout from "../../components/layout";
 import Sidebar from "../../components/novel/sidebar";
