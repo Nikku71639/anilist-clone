@@ -1,6 +1,7 @@
 {
   "name": "anilist-clone",
-  "version": "0.1.0","engines": {
+  "version": "0.1.0",
+  "engines": {
     "node": "18.x"
   },
   "private": true,
@@ -10,7 +11,7 @@
     "start": "next start"
   },
   "dependencies": {
-    "next": "latest",
+    "next": "14.2.3",
     "react": "latest",
     "react-dom": "latest"
   }
