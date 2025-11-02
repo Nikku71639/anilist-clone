@@ -7,14 +7,13 @@ import MediaCardList from "../components/rootRoute/mediaCardList";
 import novelListQuery from "../lib/novelListQuery";
 import useWindowDimensions from "../lib/useWindowDimensions";
 
-// ———————— STEP 5: Read your saved novels ————————
+// Read saved novels from browser
 const getMyNovels = () => {
   if (typeof window === "undefined") return [];
   const saved = localStorage.getItem("myNovels");
   return saved ? JSON.parse(saved) : [];
 };
 
-// ———————— Get data from your file + your novels ————————
 export async function getServerSideProps() {
   const starter = await novelListQuery();
 
@@ -27,12 +26,10 @@ export async function getServerSideProps() {
   };
 }
 
-// ———————— Main Page ————————
 export default function Home({ topScore, mostPopular, trendingNow }) {
   const { width } = useWindowDimensions();
   const [allTopNovels, setAllTopNovels] = React.useState(topScore.media);
 
-  // ———————— STEP 5: Show your novels after page loads ————————
   React.useEffect(() => {
     const myNovels = getMyNovels();
     setAllTopNovels([...topScore.media, ...myNovels]);
@@ -48,7 +45,7 @@ export default function Home({ topScore, mostPopular, trendingNow }) {
       <Landing />
       <Filters />
 
-      {/* ———————— ADD NOVEL FORM ———————— */}
+      {/* ADD NOVEL FORM */}
       <div style={{ margin: "20px auto", maxWidth: 600, padding: 20, background: "#f9f9f9", borderRadius: 12, textAlign: "center" }}>
         <h3>Add Your Own Novel</h3>
         <input placeholder="Title" id="title" style={{ padding: 10, margin: 5, width: "80%" }} />
@@ -76,8 +73,6 @@ export default function Home({ topScore, mostPopular, trendingNow }) {
             const saved = JSON.parse(localStorage.getItem("myNovels") || "[]");
             saved.push(newNovel);
             localStorage.setItem("myNovels", JSON.stringify(saved));
-
-            // Instantly show it
             setAllTopNovels(prev => [...prev, newNovel]);
           }}
           style={{ background: "#007bff", color: "white", padding: "12px 24px", border: "none", borderRadius: 8, marginTop: 10 }}
@@ -86,14 +81,13 @@ export default function Home({ topScore, mostPopular, trendingNow }) {
         </button>
       </div>
 
-      {/* ———————— LISTS ———————— */}
       <MediaCardList infoTitle="TRENDING NOW" typeOfCard="picture" data={trendingNow.media} />
       <MediaCardList infoTitle="ALL TIME POPULAR" typeOfCard="picture" data={mostPopular.media} />
       <MediaCardList
         infoTitle="TOP 100 NOVELS"
         typeOfCard={width < 950 ? "picture" : "info"}
         data={allTopNovels}
-      /> {/* ← Your novels appear here! */}
+      /> {/* Your novels appear here! */}
     </Layout>
   );
 }
