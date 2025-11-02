@@ -27,7 +27,9 @@ export default function Home({
   trendingNow,
 }) {
   const { height, width } = useWindowDimensions();
-
+  
+console.log("✅ Page rendered successfully on server");
+ 
   return (
     <Layout>
       <Head>
