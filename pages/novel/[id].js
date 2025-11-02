@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import * as React from "react"; // ✅ safer import for Vercel/Next SSR
 import novelQuery from "../../lib/novelQuery";
 import Layout from "../../components/layout";
 import Sidebar from "../../components/novel/sidebar";
@@ -16,7 +17,7 @@ export async function getServerSideProps({ query }) {
   };
 }
 
-const NovelInfoPage = ({ data, studios, producers }) => {
+export default function NovelInfoPage({ data, studios, producers }) {
   return (
     <>
       <Layout backgroundColor="#EDF1F5">
@@ -59,13 +60,13 @@ const NovelInfoPage = ({ data, studios, producers }) => {
           </div>
         </div>
       </Layout>
+
       <style jsx>{`
         .novel {
           display: flex;
           flex-direction: column;
           flex: 1;
         }
-
         .novel__content {
           display: grid;
           grid-column-gap: 2.5rem;
@@ -75,33 +76,28 @@ const NovelInfoPage = ({ data, studios, producers }) => {
           width: 89rem;
           max-width: 87rem;
         }
-
         @media screen and (max-width: 1350px) {
           .novel__content {
             width: 70rem;
           }
         }
-
         @media screen and (max-width: 1150px) {
           .novel__content {
             width: 50rem;
             justify-content: center;
           }
         }
-
         @media screen and (max-width: 1000px) {
           .novel__content {
             width: 40rem;
           }
         }
-
         @media screen and (max-width: 750px) {
           .novel__content {
             width: 30rem;
             grid-template-columns: 1fr;
           }
         }
-
         @media screen and (max-width: 500px) {
           .novel__content {
             width: 20rem;
@@ -110,6 +106,6 @@ const NovelInfoPage = ({ data, studios, producers }) => {
       `}</style>
     </>
   );
-};
+}
 
 export default NovelInfoPage;
