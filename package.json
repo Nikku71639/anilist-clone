@@ -2,7 +2,7 @@
   "name": "anilist-clone",
   "version": "0.1.0",
   "engines": {
-  "node": "22.x"
+    "node": "22.x"
 },
   "private": true,
   "scripts": {
