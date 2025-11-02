@@ -1,4 +1,3 @@
-"use client";
 import * as React from "react"; // ✅ safer import for Vercel/Next SSR
 import novelQuery from "../../lib/novelQuery";
 import Layout from "../../components/layout";
@@ -7,6 +6,7 @@ import Overview from "../../components/novel/overview";
 import NovelHeader from "../../components/novel/novelHeader";
 import refactorNovelData from "../../lib/refactorNovelData";
 
+// ✅ getServerSideProps should NOT have "use client"
 export async function getServerSideProps({ query }) {
   const novelInfo = await novelQuery(query.id);
   const novelData = refactorNovelData(novelInfo);
@@ -17,49 +17,48 @@ export async function getServerSideProps({ query }) {
   };
 }
 
+// ✅ main page component
 export default function NovelInfoPage({ data, studios, producers }) {
   return (
-    <>
-      <Layout backgroundColor="#EDF1F5">
-        <div className="novel">
-          <NovelHeader data={data} />
-          <div className="novel__content">
-            <Sidebar
-              title={data?.title}
-              format={data.format}
-              chapters={data.chapters}
-              pages={data.pages}
-              status={data.status}
-              startDate={data.startDate}
-              endDate={data.endDate}
-              season={data.season}
-              seasonYear={data.seasonYear}
-              averageScore={data.averageScore}
-              meanScore={data.meanScore}
-              popularity={data.popularity}
-              favourites={data.favourites}
-              source={data.source}
-              hashtag={data.hashtag}
-              genres={data.genres}
-              synonyms={data.synonyms}
-              studios={studios}
-              producers={producers}
-              tags={data.tags}
-              links={data.externalLinks}
-            />
-            <Overview
-              relations={data.relations.edges}
-              characters={data.characters}
-              staff={data.staff.edges}
-              stats={data.stats}
-              streamingEpisodes={data.streamingEpisodes}
-              recommendations={data.recommendations}
-              trailer={data.trailer}
-              reviews={data.reviews.edges}
-            />
-          </div>
+    <Layout backgroundColor="#EDF1F5">
+      <div className="novel">
+        <NovelHeader data={data} />
+        <div className="novel__content">
+          <Sidebar
+            title={data?.title}
+            format={data.format}
+            chapters={data.chapters}
+            pages={data.pages}
+            status={data.status}
+            startDate={data.startDate}
+            endDate={data.endDate}
+            season={data.season}
+            seasonYear={data.seasonYear}
+            averageScore={data.averageScore}
+            meanScore={data.meanScore}
+            popularity={data.popularity}
+            favourites={data.favourites}
+            source={data.source}
+            hashtag={data.hashtag}
+            genres={data.genres}
+            synonyms={data.synonyms}
+            studios={studios}
+            producers={producers}
+            tags={data.tags}
+            links={data.externalLinks}
+          />
+          <Overview
+            relations={data.relations.edges}
+            characters={data.characters}
+            staff={data.staff.edges}
+            stats={data.stats}
+            streamingEpisodes={data.streamingEpisodes}
+            recommendations={data.recommendations}
+            trailer={data.trailer}
+            reviews={data.reviews.edges}
+          />
         </div>
-      </Layout>
+      </div>
 
       <style jsx>{`
         .novel {
@@ -104,6 +103,6 @@ export default function NovelInfoPage({ data, studios, producers }) {
           }
         }
       `}</style>
-    </>
+    </Layout>
   );
-}
+    }
