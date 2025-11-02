@@ -1,3 +1,4 @@
+import React from 'react';
 import MediaCard from "../mediaCard";
 import useWindowDimensions from "../../lib/useWindowDimensions";
 
