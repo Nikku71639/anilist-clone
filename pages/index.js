@@ -87,7 +87,7 @@ export default function Home({ topScore, mostPopular, trendingNow }) {
         infoTitle="TOP 100 NOVELS"
         typeOfCard={width < 950 ? "picture" : "info"}
         data={allTopNovels}
-      /> {/* Your novels appear here! */}
+      />
     </Layout>
   );
-}
+      }
