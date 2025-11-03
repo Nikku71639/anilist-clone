@@ -90,4 +90,6 @@ export default function Home({ topScore, mostPopular, trendingNow }) {
       />
     </Layout>
   );
-}
+} 
+
+
